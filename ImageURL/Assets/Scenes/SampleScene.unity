@@ -316,7 +316,6 @@ GameObject:
   m_Component:
   - component: {fileID: 744224066}
   - component: {fileID: 744224065}
-  - component: {fileID: 744224067}
   m_Layer: 0
   m_Name: ImageURL
   m_TagString: Untagged
@@ -336,8 +335,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6af8482ef8fbbd249a0c811967b5d69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Canvas: {fileID: 0}
-  image: {fileID: 0}
+  Canvas: {fileID: 788350121}
+  image: {fileID: 1222464550}
 --- !u!4 &744224066
 Transform:
   m_ObjectHideFlags: 0
@@ -352,18 +351,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &744224067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 744224064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d7e35598618587438bfa82a002e7c6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &764360468
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,7 +1108,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898037977}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 744224065}
+        m_MethodName: OnCloseButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1898037977
 MonoBehaviour:
   m_ObjectHideFlags: 0
