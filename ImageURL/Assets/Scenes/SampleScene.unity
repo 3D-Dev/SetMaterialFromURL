@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 410104802}
   m_Layer: 0
   m_Name: Cube03
-  m_TagString: Untagged
+  m_TagString: ImagePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 764360469}
   m_Layer: 0
   m_Name: Cube02
-  m_TagString: Untagged
+  m_TagString: ImagePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -707,7 +707,7 @@ GameObject:
   - component: {fileID: 1133688166}
   m_Layer: 0
   m_Name: Cube01
-  m_TagString: Untagged
+  m_TagString: ImagePanel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

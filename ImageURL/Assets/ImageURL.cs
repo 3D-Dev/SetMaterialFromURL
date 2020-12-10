@@ -11,14 +11,23 @@ public class ImageURL : MonoBehaviour
     public GameObject image;
     void Start()
     {
-        string[] urls = new string[3];
-        urls[0] = "https://jpn-exhibition-hall.com/img/Cube01.jpg";
-        urls[1] = "https://jpn-exhibition-hall.com/img/Cube02.jpg";
-        urls[2] = "https://jpn-exhibition-hall.com/img/Cube03.jpg";
+        string[] urls = new string[200];
+        GameObject[] objList;
+        objList = GameObject.FindGameObjectsWithTag("ImagePanel");
+        int i = 0;
+        foreach(GameObject obj in objList) {
+            urls[i] = "https://jpn-exhibition-hall.com/img/" + obj.name + ".jpg";
+            Debug.Log("GetImageURLFROMSCENE:" + urls[i]);
+            i ++;
+        }
+        //urls[0] = "https://jpn-exhibition-hall.com/img/Cube01.jpg";
+        //urls[1] = "https://jpn-exhibition-hall.com/img/Cube02.jpg";
+        //urls[2] = "https://jpn-exhibition-hall.com/img/Cube03.jpg";
         //https://jpn-exhibition-hall.com/img/Cube01.jpg
         //https://jpn-exhibition-hall.com/img/Cube02.jpg
         //https://jpn-exhibition-hall.com/img/Cube03.jpg
-        StartCoroutine(DownloadImage(urls));
+        if(urls != null)
+            StartCoroutine(DownloadImage(urls));
     }
 
     void Update()
