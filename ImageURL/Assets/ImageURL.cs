@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using System.IO;
+using UnityEngine.UI;
 
 public class ImageURL : MonoBehaviour
 {
+    public GameObject Canvas;
+    public GameObject image;
     void Start()
     {
         string[] urls = new string[3];
@@ -16,6 +19,26 @@ public class ImageURL : MonoBehaviour
         //https://jpn-exhibition-hall.com/img/Cube02.jpg
         //https://jpn-exhibition-hall.com/img/Cube03.jpg
         StartCoroutine(DownloadImage(urls));
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0)) 
+        {
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit))
+            {
+                Debug.Log("GetMouseButtonDown:" + hit.collider.gameObject.name);
+                if(hit.collider.gameObject.name != "") {
+                    StartCoroutine(OnClickObject(hit.collider.gameObject.name));
+                }
+                
+            }
+            else {
+                return;
+            }
+        }
     }
 
     IEnumerator DownloadImage(string[] urls)
@@ -40,8 +63,30 @@ public class ImageURL : MonoBehaviour
                     }
                 }
             }
+        } 
+    }
+
+
+    public void OnCloseButton() {
+        Canvas.SetActive(false);
+    }
+
+    IEnumerator OnClickObject(string name) {
+        string url = "https://jpn-exhibition-hall.com/img/" + name + ".jpg";
+        UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
+        Texture2D myTexture = null;
+        yield return request.SendWebRequest();
+        if(request.isNetworkError || request.isHttpError) 
+            Debug.Log(request.error);
+        else
+            myTexture = ((DownloadHandlerTexture) request.downloadHandler).texture as Texture2D;
+
+        if(myTexture) {
+            Debug.Log("MyTexture:" + myTexture);
+            Sprite mySprite = Sprite.Create(myTexture, new Rect(0.0f, 0.0f, myTexture.width, myTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
+            image.GetComponent<Image>().overrideSprite = mySprite;
+            Canvas.SetActive(true);
         }
-        
-        
-    } 
+    }
+
 }
