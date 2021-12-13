@@ -16,16 +16,9 @@ public class ImageURL : MonoBehaviour
         objList = GameObject.FindGameObjectsWithTag("ImagePanel");
         int i = 0;
         foreach(GameObject obj in objList) {
-            urls[i] = "https://jpn-exhibition-hall.com/img/" + obj.name + ".jpg";
-            Debug.Log("GetImageURLFROMSCENE:" + urls[i]);
+            urls[i] = "server path" + obj.name + ".jpg";
             i ++;
         }
-        //urls[0] = "https://jpn-exhibition-hall.com/img/Cube01.jpg";
-        //urls[1] = "https://jpn-exhibition-hall.com/img/Cube02.jpg";
-        //urls[2] = "https://jpn-exhibition-hall.com/img/Cube03.jpg";
-        //https://jpn-exhibition-hall.com/img/Cube01.jpg
-        //https://jpn-exhibition-hall.com/img/Cube02.jpg
-        //https://jpn-exhibition-hall.com/img/Cube03.jpg
         if(urls != null)
             StartCoroutine(DownloadImage(urls));
     }
@@ -38,7 +31,6 @@ public class ImageURL : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
             {
-                Debug.Log("GetMouseButtonDown:" + hit.collider.gameObject.name);
                 if(hit.collider.gameObject.name != "") {
                     StartCoroutine(OnClickObject(hit.collider.gameObject.name));
                 }
@@ -60,12 +52,10 @@ public class ImageURL : MonoBehaviour
                 Texture myTexture = null;
                 yield return request.SendWebRequest();
                 if(request.isNetworkError || request.isHttpError) 
-                    Debug.Log(request.error);
                 else
                     myTexture = ((DownloadHandlerTexture) request.downloadHandler).texture;
 
                 if(myTexture) {
-                    Debug.Log("URLS:" + filename);
                     GameObject obj = GameObject.Find(filename);
                     if(obj) {
                         obj.GetComponent<Renderer>().material.mainTexture = myTexture;
@@ -81,17 +71,15 @@ public class ImageURL : MonoBehaviour
     }
 
     IEnumerator OnClickObject(string name) {
-        string url = "https://jpn-exhibition-hall.com/img/" + name + ".jpg";
+        string url = "server path" + name + ".jpg";
         UnityWebRequest request = UnityWebRequestTexture.GetTexture(url);
         Texture2D myTexture = null;
         yield return request.SendWebRequest();
-        if(request.isNetworkError || request.isHttpError) 
-            Debug.Log(request.error);
+        if(request.isNetworkError || request.isHttpError)             
         else
             myTexture = ((DownloadHandlerTexture) request.downloadHandler).texture as Texture2D;
 
-        if(myTexture) {
-            Debug.Log("MyTexture:" + myTexture);
+        if(myTexture) {        
             Sprite mySprite = Sprite.Create(myTexture, new Rect(0.0f, 0.0f, myTexture.width, myTexture.height), new Vector2(0.5f, 0.5f), 100.0f);
             image.GetComponent<Image>().overrideSprite = mySprite;
             Canvas.SetActive(true);
